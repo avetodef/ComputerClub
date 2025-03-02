@@ -1,0 +1,3 @@
+./build/*
+./cmake-build-debug/*
+test1.txt
