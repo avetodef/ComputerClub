@@ -7,9 +7,9 @@
 class EventFactory
 {
 public:
-    EventFactory();
+    EventFactory() = default;
 
-    Event * createEvent(Time time, int eventId, std::string clientName);
-    Event * createEvent(Time time, int eventId, std::string clientName, int tableId);
-    ErrorEvent * createErrorEvent(Time time, std::string errorName);
+    static Event * createEvent(Time time, int eventId, std::string  clientName);
+    static Event * createEvent(Time time, int eventId, std::string clientName, int tableId);
+    static ErrorEvent * createErrorEvent(Time time, std::string  errorName);
 };

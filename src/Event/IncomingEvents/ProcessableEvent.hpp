@@ -6,15 +6,13 @@
 class ProcessableEvent : public Event
 {
 public:
-    virtual void process(EventVisitor & eventVisitor) = 0;
-
-    std::string getClientName() { return clientName; }
-
-    void setClientName(const std::string &clientName) { ProcessableEvent::clientName = clientName; }
-
+    ProcessableEvent(Time time, int eventId, std::string clientName) : Event(time, eventId), clientName(std::move(clientName)) {}
     virtual ~ProcessableEvent() = default;
 
-    ProcessableEvent(Time time, int eventId, std::string clientName) : Event(time, eventId), clientName(std::move(clientName)) {}
+    std::string getClientName() { return clientName; }
+    void setClientName(const std::string &name) { ProcessableEvent::clientName = name; }
+
+    virtual void process(EventVisitor & eventVisitor) = 0;
 
     std::string toString() override {
         std::string eventInfo = Event::toString();

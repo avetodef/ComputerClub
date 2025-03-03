@@ -1,5 +1,4 @@
 #include "Table.hpp"
-#include <iostream>
 
 void Table::freeTable(){
     clientName = "";
@@ -27,9 +26,4 @@ std::string Table::toString() {
 void Table::updateTotalTimeOccupied(Time end) {
     Time timeOfOneClient = end - occupiedFrom;
     totalTimeOccupied = totalTimeOccupied + timeOfOneClient;
-}
-
-std::string Table::debugInfo() {
-    return std::to_string(id) + " " + clientName  + " " + occupiedFrom.toString() + " " + std::to_string(totalRevenue) + " " + totalTimeOccupied.toString();
-
 }

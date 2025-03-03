@@ -1,13 +1,11 @@
 #include "EventVisitor.hpp"
 #include "ComputerClub.hpp"
 #include <algorithm>
-#include <iostream> // For logging
 
 //Формат: <время> 1 <имя клиента>
 //Если клиент уже в компьютерном клубе, генерируется ошибка "YouShallNotPass"
 //Если клиент пришел в нерабочие часы, тогда "NotOpenYet"
 void EventVisitor::processClientArrived(Time time, const std::string& clientName) {
-
     if (time < club->getOpeningTime()) {
         allEvents.push_back(factory.createErrorEvent(time, "NotOpenYet"));
         return;
@@ -54,7 +52,6 @@ void EventVisitor::processTableTakenEvent(Time time, const std::string& clientNa
 //Если в клубе есть свободные столы, то генерируется ошибка "ICanWaitNoLonger!".
 //Если в очереди ожидания клиентов больше, чем общее число столов, то клиент уходит и генерируется событие ID 11.
 void EventVisitor::processClientWaitEvent(Time time, const std::string& clientName) {
-
     auto emptyTable = std::find_if(club->tables.begin(), club->tables.end(), [](const Table & table) { return table.getClientName().empty(); });
     if (emptyTable != club->tables.end()) { // There is at least one free table
         allEvents.push_back(factory.createErrorEvent(time, "ICanWaitNoLonger!"));
@@ -75,7 +72,6 @@ void EventVisitor::processClientWaitEvent(Time time, const std::string& clientNa
 //Если клиент не находится в компьютерном клубе, генерируется ошибка "ClientUnknown".
 //Когда клиент уходит, стол, за которым он сидел освобождаться и его занимает первый клиент из очереди ожидания (ID 12).
 void EventVisitor::processClientLeftEvent(Time time, const std::string& clientName) {
-
     if (std::find(club->clientsInClub.begin(), club->clientsInClub.end(), clientName) == club->clientsInClub.end()) {
         allEvents.push_back(factory.createErrorEvent(time, "ClientUnknown"));
         return;

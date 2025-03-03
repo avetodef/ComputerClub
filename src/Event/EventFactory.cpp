@@ -1,4 +1,5 @@
 #include "EventFactory.hpp"
+#include <utility>
 #include "ClientArrivedEvent.hpp"
 #include "ClientWaitEvent.hpp"
 #include "ClientLeftEvent.hpp"
@@ -36,7 +37,5 @@ Event * EventFactory::createEvent(Time time, int eventId, std::string clientName
 }
 
 ErrorEvent * EventFactory::createErrorEvent(Time time, std::string errorName){
-    return new ErrorEvent(time, 13, errorName);
+    return new ErrorEvent(time, 13, std::move(errorName));
 }
-
-EventFactory::EventFactory() {}
