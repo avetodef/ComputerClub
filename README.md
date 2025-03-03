@@ -10,5 +10,5 @@ cd build; cmake ..; cmake --build .; .\ComputerClub.exe \test.txt
 ```
 
 _Class diagram:_
-![](D:\ComputerClub\computerClub.png)
+![](computerClub.png)
 Using Visitor pattern to process events and Fabric to create events
